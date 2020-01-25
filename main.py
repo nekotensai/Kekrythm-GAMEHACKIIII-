@@ -41,7 +41,8 @@ def main():
             pygame.draw.circle(x1, (0, 0, 0), (384, 475), 15)
             pygame.draw.circle(x1, (255, 255, 255), (512, 475), 17)
             pygame.draw.circle(x1, (0, 0, 0), (512, 475), 15)
-            if y == 480:
+
+            if y == 500:
                 g = False
             if g:
                 pygame.draw.circle(x1, (0, 0, 255), (128, y), (wei))
@@ -51,7 +52,7 @@ def main():
 
             pygame.display.flip()
 
-            if y < 500 - wei:
+            if d:
                 y += speed
 
     return 0
