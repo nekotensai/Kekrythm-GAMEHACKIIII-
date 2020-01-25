@@ -33,11 +33,21 @@ def main():
             pygame.draw.line(x1, (0, 255, 0), (256, 0), (256, 512), 1)
             pygame.draw.line(x1, (255, 0, 0), (384, 0), (384, 512), 1)
             pygame.draw.line(x1, (255, 255, 0), (512, 0), (512, 512), 1)
+            pygame.draw.circle(x1, (255, 255, 255), (128, 475), 17)
+            pygame.draw.circle(x1, (0, 0, 0), (128, 475), 15)
+            pygame.draw.circle(x1, (255, 255, 255), (256, 475), 17)
+            pygame.draw.circle(x1, (0, 0, 0), (256, 475), 15)
+            pygame.draw.circle(x1, (255, 255, 255), (384, 475), 17)
+            pygame.draw.circle(x1, (0, 0, 0), (384, 475), 15)
+            pygame.draw.circle(x1, (255, 255, 255), (512, 475), 17)
+            pygame.draw.circle(x1, (0, 0, 0), (512, 475), 15)
             if y == 480:
                 g = False
             if g:
-                pygame.draw.circle(x1, (0, 0, 255), (128, 0), (wei))
-                pygame.draw.circle(x1, (0, 0, 255), (x, y), (wei))
+                pygame.draw.circle(x1, (0, 0, 255), (128, y), (wei))
+                pygame.draw.circle(x1, (0, 255, 0), (256, y), (wei))
+                pygame.draw.circle(x1, (255, 0, 0), (384, y), (wei))
+                pygame.draw.circle(x1, (255, 255, 0), (512, y), (wei))
 
             pygame.display.flip()
 
