@@ -7,6 +7,7 @@ a = ""
 v = [(1,1000),(2,10000)]
 
 
+
 def main():
     while d:
         kek=time.time()
