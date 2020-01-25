@@ -4,7 +4,7 @@ import pygame
 
 d = True
 a = ""
-v = []
+v = [1]
 
 
 def main():
@@ -172,13 +172,13 @@ def main():
 
             pygame.display.flip()
 
-            if d:
+            if d and invisible1 == True:
                 y1 += speed
-            if d:
+            if d and invisible2 == True:
                 y2 += speed
-            if d:
+            if d and invisible3 == True:
                 y3 += speed
-            if d:
+            if d and invisible4 == True:
                 y4 += speed
 
             while len(v) != 0:
