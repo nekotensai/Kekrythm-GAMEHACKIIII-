@@ -1,7 +1,11 @@
+import time
+
 import pygame
 
 d = True
 a = ""
+v = [1]
+
 
 def main():
     while d:
@@ -23,6 +27,10 @@ def main():
         invisible2 = True
         invisible3 = True
         invisible4 = True
+        blue = False
+        green = False
+        red = False
+        yellow = False
 
         a = True
         pygame.init()
@@ -60,28 +68,28 @@ def main():
                 invisible1 = False
                 y1 = 0
                 invisible1 = True
-            if invisible1:
+            if invisible1 and blue:
                 pygame.draw.circle(x1, (0, 0, 255), (128, y1), (wei))
 
             if y2 > 530:
                 invisible2 = False
                 y2 = 0
                 invisible2 = True
-            if invisible2:
+            if invisible2 and green:
                 pygame.draw.circle(x1, (0, 255, 0), (256, y2), (wei))
 
             if y3 > 530:
                 invisible3 = False
                 y3 = 0
                 invisible3 = True
-            if invisible3:
+            if invisible3 and red:
                 pygame.draw.circle(x1, (255, 0, 0), (384, y3), (wei))
 
             if y4 > 530:
                 invisible4 = False
                 y4 = 0
                 invisible4 = True
-            if invisible4:
+            if invisible4 and yellow:
                 pygame.draw.circle(x1, (255, 255, 0), (512, y4), (wei))
 
             sum1 = str(sume)
@@ -90,7 +98,7 @@ def main():
 
             x1.blit(text1, (10, 50))
 
-            # if avalible == False:
+            #  if avalible == False:
             #    if keys[pygame.K_q] or keys[pygame.K_w] or keys[pygame.K_e] or keys[pygame.K_r]:
             #        sume -= 1
 
@@ -114,10 +122,11 @@ def main():
                 if y1 <= 480:
                     avalible1 = True
                     if keys[pygame.K_q]:
-                        invisible1 = False
+                        # invisible1 = False
                         sume += 1
                         y1 = 0
-                        invisible1 = True
+                        invisible1 = False
+                        blue = False
 
             if y1 < 430 or y1 > 480:
                 avalible1 = False
@@ -126,10 +135,11 @@ def main():
                 if y2 <= 480:
                     avalible2 = True
                     if keys[pygame.K_w]:
-                        invisible2 = False
+                        # invisible2 = False
                         sume += 1
                         y2 = 0
-                        invisible2 = True
+                        invisible2 = False
+                        green = False
 
             if y2 < 430 or y2 > 480:
                 avalible2 = False
@@ -139,9 +149,10 @@ def main():
                     avalible3 = True
                     if keys[pygame.K_e]:
                         sume += 1
-                        invisible3 = False
+                        # invisible3 = False
                         y3 = 0
-                        invisible3 = True
+                        invisible3 = False
+                        red = False
 
             if y3 < 430 or y3 > 480:
                 avalible3 = False
@@ -151,10 +162,10 @@ def main():
                     avalible4 = True
                     if keys[pygame.K_r]:
                         sume += 1
-                        invisible4 = False
+                        # invisible4 = False
                         y4 = 0
-                        invisible4 = True
-
+                        invisible4 = False
+                        yellow = False
             if y4 < 430 or y4 > 480:
                 avalible4 = False
 
@@ -168,6 +179,24 @@ def main():
                 y3 += speed
             if d:
                 y4 += speed
+
+            while len(v) != 0:
+                mute = v.pop(0)
+                if mute == 1:
+                    blue = True
+                    invisible1 = True
+                elif mute == 2:
+                    green = True
+                    invisible2 = True
+                elif mute == 3:
+                    red = True
+                    invisible3 = True
+                elif mute == 4:
+                    yellow = True
+                    invisible4 = True
+                elif mute == "_":
+                    time.sleep(1)
+
     return 0
 
 
