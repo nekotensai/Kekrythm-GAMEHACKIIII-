@@ -28,21 +28,21 @@ def main():
             keys = pygame.key.get_pressed()
 
             x1.fill((0, 0, 0))
-            pygame.draw.line(x1, (255, 255, 255), (0, 475), (640, 475), 1)
+            pygame.draw.line(x1, (255, 255, 255), (0, 455), (640, 455), 1)
             pygame.draw.line(x1, (0, 0, 255), (128, 0), (128, 512), 1)
             pygame.draw.line(x1, (0, 255, 0), (256, 0), (256, 512), 1)
             pygame.draw.line(x1, (255, 0, 0), (384, 0), (384, 512), 1)
             pygame.draw.line(x1, (255, 255, 0), (512, 0), (512, 512), 1)
-            pygame.draw.circle(x1, (255, 255, 255), (128, 475), 17)
-            pygame.draw.circle(x1, (0, 0, 0), (128, 475), 15)
-            pygame.draw.circle(x1, (255, 255, 255), (256, 475), 17)
-            pygame.draw.circle(x1, (0, 0, 0), (256, 475), 15)
-            pygame.draw.circle(x1, (255, 255, 255), (384, 475), 17)
-            pygame.draw.circle(x1, (0, 0, 0), (384, 475), 15)
-            pygame.draw.circle(x1, (255, 255, 255), (512, 475), 17)
-            pygame.draw.circle(x1, (0, 0, 0), (512, 475), 15)
+            pygame.draw.circle(x1, (255, 255, 255), (128, 455), 17)
+            pygame.draw.circle(x1, (0, 0, 0), (128, 455), 15)
+            pygame.draw.circle(x1, (255, 255, 255), (256, 455), 17)
+            pygame.draw.circle(x1, (0, 0, 0), (256, 455), 15)
+            pygame.draw.circle(x1, (255, 255, 255), (384, 455), 17)
+            pygame.draw.circle(x1, (0, 0, 0), (384, 455), 15)
+            pygame.draw.circle(x1, (255, 255, 255), (512, 455), 17)
+            pygame.draw.circle(x1, (0, 0, 0), (512, 455), 15)
 
-            if y == 500:
+            if y > 510:
                 g = False
             if g:
                 pygame.draw.circle(x1, (0, 0, 255), (128, y), (wei))
