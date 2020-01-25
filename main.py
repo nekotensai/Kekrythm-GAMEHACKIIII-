@@ -4,11 +4,10 @@ a = ""
 
 def main():
     while d:
-        x = 128
         y = 0
         wei = 15
         speed = 5
-        g = True
+        invisible = True
 
         a = True
         pygame.init()
@@ -43,8 +42,8 @@ def main():
             pygame.draw.circle(x1, (0, 0, 0), (512, 455), 15)
 
             if y > 510:
-                g = False
-            if g:
+                invisible = False
+            if invisible:
                 pygame.draw.circle(x1, (0, 0, 255), (128, y), (wei))
                 pygame.draw.circle(x1, (0, 255, 0), (256, y), (wei))
                 pygame.draw.circle(x1, (255, 0, 0), (384, y), (wei))
