@@ -13,6 +13,7 @@ def main():
         a1 = 0
         while run:
             pygame.time.delay(50)
+
     return 0
 
 if __name__ == "__main__":
