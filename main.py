@@ -4,7 +4,7 @@ import pygame
 
 d = True
 a = ""
-v = [1]
+v = []
 
 
 def main():
@@ -14,6 +14,7 @@ def main():
         y2 = 0
         y3 = 0
         y4 = 0
+        y5 = 0
         wei = 15
         speed = 5
         sume = 0
