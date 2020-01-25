@@ -57,25 +57,33 @@ def main():
             #    pygame.draw.circle(x1, (255, 0, 0), (384, y), (wei))
             #    pygame.draw.circle(x1, (255, 255, 0), (512, y), (wei))
 
-            if y1 > 510:
+            if y1 > 530:
                 invisible1 = False
+                y1 = 0
+                invisible1 = True
             if invisible1:
                 pygame.draw.circle(x1, (0, 0, 255), (128, y1), (wei))
 
-            if y2 > 510:
+            if y2 > 530:
                 invisible2 = False
+                y2 = 0
+                invisible2 = True
             if invisible2:
-                pygame.draw.circle(x1, (0, 0, 255), (128, y2), (wei))
+                pygame.draw.circle(x1, (0, 255, 0), (256, y2), (wei))
 
-            if y3 > 510:
+            if y3 > 530:
                 invisible3 = False
+                y3 = 0
+                invisible3 = True
             if invisible3:
-                pygame.draw.circle(x1, (0, 0, 255), (128, y3), (wei))
+                pygame.draw.circle(x1, (255, 0, 0), (384, y3), (wei))
 
-            if y4 > 510:
+            if y4 > 530:
                 invisible4 = False
+                y4 = 0
+                invisible4 = True
             if invisible4:
-                pygame.draw.circle(x1, (0, 0, 255), (128, y4), (wei))
+                pygame.draw.circle(x1, (255, 255, 0), (512, y4), (wei))
 
             if y1 >= 440:
                 if y1 <= 470:
@@ -111,7 +119,10 @@ def main():
                 y1 += speed
             if d:
                 y2 += speed
-
+            if d:
+                y3 += speed
+            if d:
+                y4 += speed
     return 0
 
 if __name__ == "__main__":
