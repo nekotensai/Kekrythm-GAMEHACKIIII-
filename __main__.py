@@ -4,11 +4,12 @@ import pygame
 
 d = True
 a = ""
-v = [1]
+v = [(1,1000),(2,10000)]
 
 
 def main():
     while d:
+        kek=time.time()
         y = 0
         y1 = 0
         y2 = 0
@@ -183,20 +184,21 @@ def main():
 
             while len(v) != 0:
                 mute = v.pop(0)
-                if mute == 1:
-                    blue = True
-                    invisible1 = True
-                elif mute == 2:
-                    green = True
-                    invisible2 = True
-                elif mute == 3:
-                    red = True
-                    invisible3 = True
-                elif mute == 4:
-                    yellow = True
-                    invisible4 = True
-                elif mute == "_":
-                    time.sleep(1)
+                if (kek - time.time()==0):
+                    if mute[0] == 1:
+                        blue = True
+                        invisible1 = True
+                    elif mute[0] == 2:
+                        green = True
+                        invisible2 = True
+                    elif mute[0] == 3:
+                        red = True
+                        invisible3 = True
+                    elif mute[0] == 4:
+                        yellow = True
+                        invisible4 = True
+                    elif mute == "_":
+                        time.sleep(1)
 
     return 0
 
