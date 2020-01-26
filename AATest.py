@@ -1,5 +1,6 @@
-import pygame
 import sys
+
+import pygame
 
 pygame.init()
 screen = pygame.display.set_mode((640, 512))
@@ -21,3 +22,4 @@ while 1:
     screen.fill(black)
     screen.blit(ball, ballrect)
     pygame.display.flip()
+
