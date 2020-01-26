@@ -1,15 +1,24 @@
 import time
 import pygame
+from threading import Thread
+import os
 
 pygame.init()
 pygame.font.init() 
 myfont = pygame.font.SysFont('Comic Sans MS', 30)
-v = [('N','G',28),('N','B',50),('S','R',100,60),('N','B',130)]
+v = [('N','G',28),('N','B',50),('S','R',100,60),('N','B',130),('N','G',150),('N','B',200)]
 color = {'B':512//4,'G':512*2//4,'Y':512*3//4,'R':512*4//4}
 colors = {'B':(0,0,255),'G':(0,255,0),'Y':(255,255,0),'R':(255,0,0)}
 fps = 60
 clock = pygame.time.Clock()
+ball = pygame.image.load('1.png')
 
+
+
+
+def music_play():
+    music = pygame.mixer.music.load('./music.mp3')
+    pygame.mixer.music.play()
 
 class slider():
     def __init__(self, x, screen, velocity, color, length):
@@ -49,7 +58,8 @@ class note():
         self.color = colors[color]
 
     def draw(self):
-        pygame.draw.circle(self.screen, self.color, (self.x, self.y), self.r)
+        # pygame.draw.circle(self.screen, self.color, (self.x, self.y), self.r)
+        self.screen.blit(ball, (self.x - self.r, self.y - self.r))
 
     def move(self):
         self.y += self.velocity
@@ -69,6 +79,7 @@ def main():
     points = 0
     timer = 0
     timer_for_penalty = 0
+
     while True:
         screen = pygame.display.set_mode((640, 512))
 
@@ -185,4 +196,7 @@ def draw_field(screen):
 
 
 if __name__ == "__main__":
+    os.system('./music_play.py')
+    # music = pygame.mixer.music.load('./music.mp3')
+    # pygame.mixer.music.play()
     main()
