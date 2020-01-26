@@ -11,7 +11,8 @@ os.environ['SDL_VIDEO_CENTERED'] = '1'
 screen_width = 640
 screen_height = 512
 screen = pygame.display.set_mode((screen_width, screen_height))
-
+bg = pygame.image.load("864big.bmp")
+bgr = bg.get_rect()
 
 # Text Renderer
 def text_format(message, textFont, textSize, textColor):
@@ -73,6 +74,7 @@ def main_menu():
 
         # Main Menu UI
         screen.fill(blue)
+        screen.blit(bg, bgr)
         title = text_format("KekRhythm", font, 90, yellow)
         if selected == "stage 1":
             text_stage_1 = text_format("STAGE 1", font, 75, white)
