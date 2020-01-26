@@ -74,7 +74,7 @@ def main():
         for i in pygame.event.get():
             if i.type == pygame.QUIT:
                 exit()
-            elif i.type == pygame.KEYUP:
+            elif i.type == pygame.KEYUP:    
                 # flag = False
                 if i.key == pygame.K_q:
                     xtemp = 512//4

@@ -1,0 +1,1 @@
+to change between the two types of numbers just open the according folder and drop ALL files from it into the skin folder
