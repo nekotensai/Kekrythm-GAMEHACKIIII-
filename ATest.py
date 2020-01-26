@@ -1,5 +1,4 @@
 import pygame
-
 pygame.init()
 pygame.font.init()
 myfont = pygame.font.SysFont('Comic Sans MS', 30)
@@ -8,6 +7,7 @@ color = {'B': 512 // 4, 'G': 512 * 2 // 4, 'Y': 512 * 3 // 4, 'R': 512 * 4 // 4}
 colors = {'B': (0, 0, 255), 'G': (0, 255, 0), 'Y': (255, 255, 0), 'R': (255, 0, 0)}
 fps = 60
 clock = pygame.time.Clock()
+ball = pygame.image.load('1.png')
 
 
 class slider():
@@ -48,7 +48,8 @@ class note():
         self.color = colors[color]
 
     def draw(self):
-        pygame.draw.circle(self.screen, self.color, (self.x, self.y), self.r)
+        # pygame.draw.circle(self.screen, self.color, (self.x, self.y), self.r)
+        self.screen.blit(ball, (self.x - self.r, self.y - self.r))
 
     def move(self):
         self.y += self.velocity
@@ -76,13 +77,13 @@ def main():
             elif i.type == pygame.KEYUP:
                 # flag = False
                 if i.key == pygame.K_q:
-                    xtemp = 512 // 4
+                    xtemp = 512 //4
                 elif i.key == pygame.K_w:
-                    xtemp = 512 * 2 // 4
+                    xtemp = 512 * 2 //4
                 elif i.key == pygame.K_e:
-                    xtemp = 512 * 3 // 4
+                    xtemp = 512 * 3 //4
                 elif i.key == pygame.K_r:
-                    xtemp = 512 * 4 // 4
+                    xtemp = 512 * 4 //4
                 elif i.key == pygame.K_u:
                     exit()
                 else:
@@ -99,6 +100,7 @@ def main():
                         if i[1] >= 7:
                             i[1] = 0
                             points += 1
+
 
                         # flag = True
                 # if not flag:
@@ -142,10 +144,10 @@ def draw_field(screen):
     pygame.display.set_caption("KekRythm")
     pygame.draw.rect(screen, (100, 100, 100), (0, 0, 640, 512))
     # pygame.draw.line(screen, (0, 0, 0), (0, 455), (640, 455), 1)
-    pygame.draw.line(screen, (0, 0, 255), (128, 0), (128, 512), 1)
-    pygame.draw.line(screen, (0, 255, 0), (256, 0), (256, 512), 1)
-    pygame.draw.line(screen, (255, 255, 0), (384, 0), (384, 512), 1)
-    pygame.draw.line(screen, (255, 0, 0), (512, 0), (512, 512), 1)
+    pygame.draw.line(screen, (0, 0, 255), (128, 0), (128, 512), 3)
+    pygame.draw.line(screen, (0, 255, 0), (256, 0), (256, 512), 3)
+    pygame.draw.line(screen, (255, 255, 0), (384, 0), (384, 512), 3)
+    pygame.draw.line(screen, (255, 0, 0), (512, 0), (512, 512), 3)
 
     pygame.draw.circle(screen, (255, 255, 255), (128, 455), 15, 1)
     # pygame.draw.circle(screen, (0, 0, 0), (128, 455), 15)
