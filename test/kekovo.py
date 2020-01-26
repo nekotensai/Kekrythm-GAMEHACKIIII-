@@ -3,8 +3,8 @@ import pygame
 from threading import Thread
 import os
 from site1 import parse
-H = 1024
-W = 1280
+H = 512
+W = 640
 
 level = 0
 
@@ -20,10 +20,17 @@ clock = pygame.time.Clock()
 ball = pygame.image.load('1.png')
 sound1 = pygame.mixer.Sound("./hitsound.wav")
 # pygame.mouse.set_visible(False)
+marks=[]
+for i in range(7):
+    marks.append((str(i+1)+'.png'))
 
+def final(po):
+    kek = pygame.image.load(marks[po[1]//po[0]])
+    while True:
+            screen.update()
 
 def music_play():
-    sound1 = pygame.mixer.Sound("./blends.wav")
+    sound1 = pygame.mixer.Sound("./" + str(level) + ".wav")
     pygame.mixer.find_channel(True).play(sound1)
 
 class slider():
@@ -154,7 +161,7 @@ def main():
 
             v.pop(0)
             if len(v) == 0:
-                v.append((0, 0, -1))
+                return [points, len(v)]
 
         for i in notes:
             if i.y > H:
@@ -211,13 +218,15 @@ def draw_field(screen):
 
 
 def fake_main():
-    polling_thread = Thread(target = main)
+    polling_thread = Thread(target = fake_main_2)
     spam_thread = Thread(target = music_play)
     polling_thread.start()
     spam_thread.start()
     # music = pygame.mixer.music.load('./music.mp3')
     # pygame.mixer.music.play()
-
+def fake_main_2():
+    po = main()
+    final(po)
 
 def menu():
     screen = pygame.display.set_mode((W, H))
@@ -273,11 +282,14 @@ def menu():
                         selected = "stage 2"
                     if event.key == pygame.K_4:
                         if selected == "stage 1":
-                            level = 0
+                            pygame.display.quit()
+                            return 0
                         if selected == "stage 2":
-                            pass  ## TODO: Карту №2
+                            pygame.display.quit()
+                            return 1
                         if selected == "stage 3":
-                            pass  ## TODO: Карту №3
+                            pygame.display.quit()
+                            return 2
                         if selected == "quit":
                             pygame.quit()
                             quit()
@@ -319,10 +331,12 @@ def menu():
             pygame.display.update()
             clock.tick(FPS)
             pygame.display.set_caption("Python - Pygame Simple Main Menu Selection")
-    main_menu()
+    return main_menu()
+    
 
 
 if __name__ == "__main__":
     # os.system('python3 music_play.py')
-    menu()
+    level = menu()
+    print(level)
     fake_main()
