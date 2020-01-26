@@ -20,6 +20,7 @@ def music_play():
     music = pygame.mixer.music.load('./music.mp3')
     pygame.mixer.music.play()
 
+
 class slider():
     def __init__(self, x, screen, velocity, color, length):
         self.r = 15
@@ -60,6 +61,7 @@ class note():
     def draw(self):
         # pygame.draw.circle(self.screen, self.color, (self.x, self.y), self.r)
         self.screen.blit(ball, (self.x - self.r, self.y - self.r))
+    # pygame.mixer.music.play()self.x - self.r, self.y - self.r))
 
     def move(self):
         self.y += self.velocity
@@ -196,7 +198,10 @@ def draw_field(screen):
 
 
 if __name__ == "__main__":
-    os.system('./music_play.py')
+    # os.system('python3 music_play.py')
+    polling_thread = Thread(target=main)
+    spam_thread = Thread(target=music_play)
+    polling_thread.start()
+    spam_thread.start()
     # music = pygame.mixer.music.load('./music.mp3')
     # pygame.mixer.music.play()
-    main()
