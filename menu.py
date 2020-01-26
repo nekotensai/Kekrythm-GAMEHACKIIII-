@@ -99,6 +99,7 @@ class MainMenu:
         pygame.init()
         pygame.font.init()
 
+
         from pyfiles.GameLoop import GameLoop
         level = '1'
         game = GameLoop()
