@@ -1,163 +1,160 @@
 import pygame
 
-d = True
-a = ""
-sprites = ("sprite.png", "sprite.png", "sprite.png", "sprite.png")
-sprite_surf = []
-x1 = pygame.display.set_mode((640, 512))
-for i in range(len(sprites)):
-    sprite_surf.append(pygame.image.load(r"C:\Users\Comp\PycharmProjects\Kekrythm-GAMEHACKIIII-\1.png").convert_alpha())
+pygame.init()
+pygame.font.init()
+myfont = pygame.font.SysFont('Comic Sans MS', 30)
+v = [('N', 'G', 28), ('N', 'B', 50), ('S', 'R', 100, 60), ('N', 'B', 130)]
+color = {'B': 512 // 4, 'G': 512 * 2 // 4, 'Y': 512 * 3 // 4, 'R': 512 * 4 // 4}
+colors = {'B': (0, 0, 255), 'G': (0, 255, 0), 'Y': (255, 255, 0), 'R': (255, 0, 0)}
+fps = 60
+clock = pygame.time.Clock()
 
 
-class note(pygame.sprite.Sprite):
-    def __init__(self, x, surf, speed, group):
-        pygame.sprite.Sprite.__init__(self)
-        y = 512
-        self.image = surf
-        self.speed = speed
+class slider():
+    def __init__(self, x, screen, velocity, color, length):
+        self.r = 15
+        self.b = 1
+        self.length = length * velocity
         self.x = x
+        self.y = 0 - self.r - self.length
+        self.screen = screen
+        self.velocity = velocity
+        self.color = colors[color]
+
+    def move():
+        self.y += self.velocity
+
+    def draw(self):
+        pygame.draw.circle(self.screen, self.color, (self.x, self.y), self.r)
+        pygame.draw.circle(self.screen, self.color, (self.x, self.y + self.length), self.r)
+        pygame.draw.rect(self.screen, self.color, (self.x - self.r, self.y, self.r * 2, self.length))
+
+    def move(self):
+        self.y += self.velocity
+
+    def __del__(self):
         self.y = 512
-        self.add(group)
-        self.rect = self.image.get_rect(center=(x, y))
-
-    def update(self):
-        if self.rect.y > 0:
-            self.rect.y -= self.speed
-        else:
-
-            self.kill()
+        self.color = (0, 0, 0)
+        self.b = 0
 
 
-sprit = pygame.sprite.Group()
-blue_note = note(128, x1, 5, sprit)
+class note():
+    def __init__(self, x, screen, velocity, color):
+        self.r = 15
+        self.x = x
+        self.y = 0 - self.r
+        self.screen = screen
+        self.velocity = velocity
+        self.color = colors[color]
+
+    def draw(self):
+        pygame.draw.circle(self.screen, self.color, (self.x, self.y), self.r)
+
+    def move(self):
+        self.y += self.velocity
+
+    def __del__(self):
+        self.y = 512
+        self.color = (0, 0, 0)
+        self.r = 0
 
 
 def main():
-    while d:
-        y = 0
+    temp = 0
+    notes = []
+    sliders = []
+    points = 0
+    timer = 0
+    while True:
+        screen = pygame.display.set_mode((640, 512))
 
-        y1 = 0
-        y2 = 0
-        y3 = 0
-        y4 = 0
-        wei = 15
-        speed = 5
-        invisible1 = True
-        invisible2 = True
-        invisible3 = True
-        invisible4 = True
+        draw_field(screen)
 
-        a = True
-        pygame.init()
-        x1 = pygame.display.set_mode((640, 512))
-
-        pygame.display.set_caption("KekRythm")
-
-        run = True
-        a1 = 0
-
-        while run:
-            pygame.time.delay(50)
-
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    run = False
+        for i in pygame.event.get():
+            if i.type == pygame.QUIT:
+                exit()
+            elif i.type == pygame.KEYUP:
+                # flag = False
+                if i.key == pygame.K_q:
+                    xtemp = 512 // 4
+                elif i.key == pygame.K_w:
+                    xtemp = 512 * 2 // 4
+                elif i.key == pygame.K_e:
+                    xtemp = 512 * 3 // 4
+                elif i.key == pygame.K_r:
+                    xtemp = 512 * 4 // 4
+                elif i.key == pygame.K_u:
                     exit()
-            keys = pygame.key.get_pressed()
+                else:
+                    xtemp = -100
 
-            x1.fill((0, 0, 0))
-            pygame.draw.line(x1, (255, 255, 255), (0, 455), (640, 455), 1)
-            pygame.draw.line(x1, (0, 0, 255), (128, 0), (128, 512), 1)
-            pygame.draw.line(x1, (0, 255, 0), (256, 0), (256, 512), 1)
-            pygame.draw.line(x1, (255, 0, 0), (384, 0), (384, 512), 1)
-            pygame.draw.line(x1, (255, 255, 0), (512, 0), (512, 512), 1)
-            pygame.draw.circle(x1, (255, 255, 255), (128, 455), 17)
-            pygame.draw.circle(x1, (0, 0, 0), (128, 455), 15)
-            pygame.draw.circle(x1, (255, 255, 255), (256, 455), 17)
-            pygame.draw.circle(x1, (0, 0, 0), (256, 455), 15)
-            pygame.draw.circle(x1, (255, 255, 255), (384, 455), 17)
-            pygame.draw.circle(x1, (0, 0, 0), (384, 455), 15)
-            pygame.draw.circle(x1, (255, 255, 255), (512, 455), 17)
-            pygame.draw.circle(x1, (0, 0, 0), (512, 455), 15)
+                for i in notes:
+                    if i.y < 465 and i.y > 445 and i.x == xtemp:
+                        points += 1
+                        i.__del__()
 
-            # if y > 510:
-            #    invisible = False
-            # if invisible:
-            #    pygame.draw.circle(x1, (0, 0, 255), (128, y), (wei))
-            #    pygame.draw.circle(x1, (0, 255, 0), (256, y), (wei))
-            #    pygame.draw.circle(x1, (255, 0, 0), (384, y), (wei))
-            #    pygame.draw.circle(x1, (255, 255, 0), (512, y), (wei))
-            blue_note = note(128, x1, speed, sprit)
-            green_note = note(256, x1, speed, sprit)
-            red_note = note(384, x1, speed, sprit)
-            yell_note = note(512, x1, speed, sprit)
-            if (blue_note.y > 510):
-                blue_note.kill()
-            if (red_note.y > 510):
-                red_note.kill()
-            if (green_note.y > 510):
-                green_note.kill()
-            if (yell_note.y > 510):
-                yell_note.kill()
+                for i in sliders:
+                    i[1] += 1
+                    if i[0].y < 465 and i[0].y + i[0].length > 445 and i[0].x == xtemp:
+                        if i[1] >= 7:
+                            i[1] = 0
+                            points += 1
 
-            # if y1 > 510:
-            #     invisible1 = False
-            # if invisible1:
-            #     pygame.draw.circle(x1, (0, 0, 255), (128, y1), (wei))
-            #
-            # if y2 > 510:
-            #     invisible2 = False
-            # if invisible2:
-            #     pygame.draw.circle(x1, (0, 0, 255), (128, y2), (wei))
-            #
-            # if y3 > 510:
-            #     invisible3 = False
-            # if invisible3:
-            #     pygame.draw.circle(x1, (0, 0, 255), (128, y3), (wei))
-            #
-            # if y4 > 510:
-            #     invisible4 = False
-            # if invisible4:
-            #     pygame.draw.circle(x1, (0, 0, 255), (128, y4), (wei))
+                        # flag = True
+                # if not flag:
+                #     points -=1
 
-            if y1 >= 440:
-                if y1 <= 470:
-                    if keys[pygame.K_q]:
-                        invisible1 = False
-                        y1 = 0
-                        invisible1 = True
+        if v[0][2] == temp:
+            if v[0][0] == 'N':
+                notes.append(note(color[v[0][1]], screen, 3, v[0][1]))
 
-            if y2 >= 440:
-                if y2 <= 470:
-                    if keys[pygame.K_w]:
-                        invisible2 = False
-                        y2 = 0
-                        invisible2 = True
+            elif v[0][0] == 'S':
+                sliders.append([slider(color[v[0][1]], screen, 3, v[0][1], v[0][3]), 10])
 
-            if y3 >= 440:
-                if y3 <= 470:
-                    if keys[pygame.K_e]:
-                        invisible3 = False
-                        y3 = 0
-                        invisible3 = True
+            v.pop(0)
+            if len(v) == 0:
+                v.append((0, 0, -1))
 
-            if y4 >= 440:
-                if y4 <= 470:
-                    if keys[pygame.K_r]:
-                        invisible4 = False
-                        y4 = 0
-                        invisible4 = True
-            sprit.draw(x1)
-            pygame.display.flip()
-            sprit.update()
-            pygame.time.delay(20)
+        for i in notes:
+            if i.y > 512:
+                del i
+            else:
+                i.draw()
+                i.move()
 
-            if d:
-                y1 += speed
-            if d:
-                y2 += speed
+        for i in sliders:
+            if i[0].y > 512:
+                del i
+            else:
+                i[0].draw()
+                i[0].move()
 
-    return 0
+        textsurface = myfont.render(str(points), False, (255, 255, 255))
+        screen.blit(textsurface, (50, 10))
+
+        pygame.display.flip()
+
+        clock.tick(fps)
+        temp += 1
+
+
+def draw_field(screen):
+    pygame.display.set_caption("KekRythm")
+    pygame.draw.rect(screen, (100, 100, 100), (0, 0, 640, 512))
+    # pygame.draw.line(screen, (0, 0, 0), (0, 455), (640, 455), 1)
+    pygame.draw.line(screen, (0, 0, 255), (128, 0), (128, 512), 1)
+    pygame.draw.line(screen, (0, 255, 0), (256, 0), (256, 512), 1)
+    pygame.draw.line(screen, (255, 255, 0), (384, 0), (384, 512), 1)
+    pygame.draw.line(screen, (255, 0, 0), (512, 0), (512, 512), 1)
+
+    pygame.draw.circle(screen, (255, 255, 255), (128, 455), 15, 1)
+    # pygame.draw.circle(screen, (0, 0, 0), (128, 455), 15)
+    pygame.draw.circle(screen, (255, 255, 255), (256, 455), 15, 1)
+    # pygame.draw.circle(screen, (0, 0, 0), (256, 455), 15)
+    pygame.draw.circle(screen, (255, 255, 255), (384, 455), 15, 1)
+    # pygame.draw.circle(screen, (0, 0, 0), (384, 455), 15)
+    pygame.draw.circle(screen, (255, 255, 255), (512, 455), 15, 1)
+    # pygame.draw.circle(screen, (0, 0, 0), (512, 455), 15)
 
 
 if __name__ == "__main__":
