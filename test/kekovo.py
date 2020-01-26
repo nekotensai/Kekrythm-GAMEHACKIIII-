@@ -3,8 +3,8 @@ import pygame
 from threading import Thread
 import os
 from site1 import parse
-H = 512
-W = 640
+H = 1024
+W = 1280
 
 level = 0
 
