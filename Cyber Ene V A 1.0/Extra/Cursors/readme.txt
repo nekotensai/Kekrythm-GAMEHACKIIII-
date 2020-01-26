@@ -1,0 +1,1 @@
+the cursors in the folders "style1" and "style2" all have short trails. if you want to use a short trail you have to delete cursormiddle from the skin folder. if you want to use a long cursortrail take a cursor of your choice from the "style1" or "style2" folder and pick a cursortrail from the "long trails" folder.
