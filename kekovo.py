@@ -97,15 +97,15 @@ def main():
                 exit()
             elif i.type == pygame.KEYUP:
                 # flag = False
-                if i.key == pygame.K_q:
+                if i.key == pygame.K_4:
                     xtemp = H//4
-                elif i.key == pygame.K_w:
+                elif i.key == pygame.K_5:
                     xtemp = H*2//4
-                elif i.key == pygame.K_e:
+                elif i.key == pygame.K_6:
                     xtemp = H*3//4
-                elif i.key == pygame.K_r:
+                elif i.key == pygame.K_7:
                     xtemp = H*4//4
-                elif i.key == pygame.K_u:
+                elif i.key == pygame.K_w:
                     exit()
                 else:
                     xtemp = -100
