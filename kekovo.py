@@ -3,6 +3,9 @@ import pygame
 from threading import Thread
 import os
 
+
+pygame.mixer.pre_init(44100, -16, 1, 512)
+
 pygame.init()
 pygame.font.init() 
 myfont = pygame.font.SysFont('Comic Sans MS', 30)
@@ -12,14 +15,14 @@ colors = {'B':(0,0,255),'G':(0,255,0),'Y':(255,255,0),'R':(255,0,0)}
 fps = 60
 clock = pygame.time.Clock()
 ball = pygame.image.load('1.png')
+sound1 = pygame.mixer.Sound("./hitsound.wav")
 
 
 
 
 def music_play():
-    music = pygame.mixer.music.load('./music.mp3')
-    pygame.mixer.music.play()
-
+    sound1 = pygame.mixer.Sound("./music.wav")
+    pygame.mixer.find_channel(True).play(sound1)
 
 class slider():
     def __init__(self, x, screen, velocity, color, length):
@@ -106,12 +109,11 @@ def main():
                 else:
                     xtemp = -100
 
-                
 
                 for i in notes:
                     if i.y < 465 and i.y > 445 and i.x == xtemp:
-                        music = pygame.mixer.music.load('hitsound.wav')
-                        pygame.mixer.music.play()
+
+                        pygame.mixer.find_channel(True).play(sound1)
                         points += 10 * combo_counter
                         timer_for_penalty = 0
                         i.__del__()
@@ -199,7 +201,10 @@ def draw_field(screen):
 
 
 if __name__ == "__main__":
-    os.system('./music_play.py')
+    # os.system('python3 music_play.py')
+    polling_thread = Thread(target=main)
+    spam_thread = Thread(target=music_play)
+    polling_thread.start()
+    spam_thread.start()
     # music = pygame.mixer.music.load('./music.mp3')
     # pygame.mixer.music.play()
-    main()
