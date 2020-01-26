@@ -20,6 +20,7 @@ def music_play():
     music = pygame.mixer.music.load('./music.mp3')
     pygame.mixer.music.play()
 
+
 class slider():
     def __init__(self, x, screen, velocity, color, length):
         self.r = 15
@@ -109,6 +110,8 @@ def main():
 
                 for i in notes:
                     if i.y < 465 and i.y > 445 and i.x == xtemp:
+                        music = pygame.mixer.music.load('hitsound.wav')
+                        pygame.mixer.music.play()
                         points += 10 * combo_counter
                         timer_for_penalty = 0
                         i.__del__()

@@ -4,7 +4,7 @@ import pygame
 #     music = pygame.mixer.music.load('./music.mp3')
 #     pygame.mixer.music.play()
 
-pygame.init()
+pygame.mixer.init()
 music = pygame.mixer.music.load('./music.mp3')
 pygame.mixer.music.play()
 
