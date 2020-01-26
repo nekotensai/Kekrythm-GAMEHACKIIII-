@@ -22,12 +22,16 @@ sound1 = pygame.mixer.Sound("./hitsound.wav")
 # pygame.mouse.set_visible(False)
 marks=[]
 for i in range(7):
-    marks.append((str(i+1)+'.png'))
+    marks.append((str(i+1)+'.jpg'))
 
 def final(po):
+    print(po)
+    screen = pygame.display.set_mode((W, H))
     kek = pygame.image.load(marks[po[1]//po[0]])
+    screen.blit(kek,(0,0))
     while True:
-            screen.update()
+        pygame.display.flip()
+
 
 def music_play():
     sound1 = pygame.mixer.Sound("./" + str(level) + ".wav")
@@ -114,7 +118,7 @@ def main():
                 elif i.key == pygame.K_7:
                     xtemp = W*4//4 - W //8
                 elif i.key == pygame.K_w:
-                    exit()
+                    return [points, len(v)]
                 else:
                     xtemp = -100
 
@@ -338,5 +342,4 @@ def menu():
 if __name__ == "__main__":
     # os.system('python3 music_play.py')
     level = menu()
-    print(level)
     fake_main()

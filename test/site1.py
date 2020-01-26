@@ -1810,4 +1810,3 @@ def parse(x):
     for i in massovo:
         kekekeke.append(('N', random.choice(['Y','B','G','R']), int(i// (50/3))))
     return kekekeke
-print(parse(2))
