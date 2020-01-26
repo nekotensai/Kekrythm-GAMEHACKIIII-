@@ -61,15 +61,20 @@ class note():
 
 
 def main():
+    combo = 0
+    combo_counter = 0
     temp = 0
     notes = []
     sliders = []
     points = 0
     timer = 0
+    timer_for_penalty = 0
     while True:
         screen = pygame.display.set_mode((640, 512))
 
         draw_field(screen)
+
+        points_temp = points
 
         for i in pygame.event.get():
             if i.type == pygame.QUIT:
@@ -89,19 +94,35 @@ def main():
                 else:
                     xtemp = -100
 
+                
+
                 for i in notes:
                     if i.y < 465 and i.y > 445 and i.x == xtemp:
-                        points += 1
+                        points += 10 * combo_counter
+                        timer_for_penalty = 0
                         i.__del__()
+
 
                 for i in sliders:
                     i[1] += 1
                     if i[0].y < 465 and i[0].y + i[0].length > 445 and i[0].x == xtemp:
                         if i[1] >= 7:
                             i[1] = 0
-                            points += 1
+                            points += 5 * combo_counter
+                            timer_for_penalty = 0
 
+            combo += points - points_temp
 
+            if points == points_temp:
+                if timer_for_penalty >= 30:
+                        points -= 5
+                        timer_for_penalty = 0
+                        combo = 0
+                        combo_counter = 0
+
+            if combo >= 100 * combo_counter:
+                if combo_counter < 10:
+                    combo_counter += 1
                         # flag = True
                 # if not flag:
                 #     points -=1
@@ -134,11 +155,15 @@ def main():
         textsurface = myfont.render(str(points), False, (255, 255, 255))
         screen.blit(textsurface,(50,10))
 
+        textsurface = myfont.render(str(combo_counter), False, (255, 255, 255))
+        screen.blit(textsurface,(50,80))
+
         pygame.display.flip()
 
         clock.tick(fps)
-        temp += 1
 
+        temp += 1
+        timer_for_penalty += 1
 
 def draw_field(screen):
         pygame.display.set_caption("KekRythm")
